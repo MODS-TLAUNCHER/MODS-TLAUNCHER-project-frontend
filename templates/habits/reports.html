@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Reportes - biUNestar{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-chart-line me-2 text-info"></i>Reportes</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-tasks fa-3x text-primary mb-3"></i>
+                <h3 class="card-title">{{ total_habits }}</h3>
+                <p class="card-text text-muted">Total de Habitos</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-calendar-check fa-3x text-success mb-3"></i>
+                <h3 class="card-title">{{ completed_today }}</h3>
+                <p class="card-text text-muted">Completados Hoy</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-fire fa-3x text-warning mb-3"></i>
+                <h3 class="card-title">{{ current_streak }}</h3>
+                <p class="card-text text-muted">Racha Actual</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow mt-4">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Resumen de Habitos</h5>
+    </div>
+    <div class="card-body">
+        {% if habits %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Habito</th>
+                        <th>Frecuencia</th>
+                        <th>Meta</th>
+                        <th>Creado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for habit in habits %}
+                    <tr>
+                        <td>{{ habit.name }}</td>
+                        <td>{{ habit.get_frequency_display }}</td>
+                        <td>{{ habit.target_value }} {{ habit.unit }}</td>
+                        <td>{{ habit.created_at|date:"d/m/Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-4">
+            <i class="fas fa-chart-bar fa-3x text-muted mb-3"></i>
+            <p class="text-muted">No hay habitos para mostrar en los reportes.</p>
+            <a href="{% url 'habit_create' %}" class="btn btn-primary">
+                <i class="fas fa-plus-circle me-1"></i> Crear Primer Habito
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
