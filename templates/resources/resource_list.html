@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Recursos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">
+        <i class="fas fa-book me-2"></i> Recursos
+    </h1>
+
+    {% if resources %}
+        <div class="row">
+            {% for resource in resources %}
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ resource.name }}</h5>
+                            <p class="card-text">{{ resource.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No hay recursos registrados aún.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
