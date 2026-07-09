@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Iniciar Sesión - biUNestar{% endblock %}
+
+{% block page_header %}Bienvenido{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión</h4>
+            </div>
+            <div class="card-body p-4">
+                
+                <!-- Mostramos errores si el login falla -->
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        Usuario o contraseña incorrectos. Inténtalo de nuevo.
+                    </div>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <!-- CAMPO DE USUARIO (Manual) -->
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Nombre de Usuario</label>
+                        <input type="text" name="username" class="form-control" 
+                               placeholder="Ej: admin" required id="id_username">
+                    </div>
+
+                    <!-- CAMPO DE CONTRASEÑA (Manual) -->
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Contraseña</label>
+                        <input type="password" name="password" class="form-control" 
+                               placeholder="Tu contraseña" required id="id_password">
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Ingresar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center py-3 bg-light">
+                <p class="mb-0">¿No tienes cuenta?</p>
+                <a href="{% url 'register' %}" class="btn btn-sm btn-outline-primary mt-2">Registrarse</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
