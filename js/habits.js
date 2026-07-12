@@ -149,5 +149,7 @@ renderNavUser();
 
 const dateInput = document.getElementById("recordDate");
 dateInput.max = todayISO();
-dateInput.value = todayISO();
+const urlParams = new URLSearchParams(window.location.search);
+const requestedDate = urlParams.get("date");
+dateInput.value = requestedDate && requestedDate <= dateInput.max ? requestedDate : todayISO(); 
 loadRecordForDate(dateInput.value);
