@@ -72,10 +72,10 @@ biUNestar-frontend/
 
 - [x] `index.html` — Login con Google.
 - [x] `dashboard.html` — Resumen de hoy + promedios semanales (RF_09).
+- [x] `habits.html` — Registrar/editar hábitos del día (RF_07/RF_08), con sliders y selector de estado de ánimo (RNF_09).
 
 ## Próximas páginas (pendientes)
 
-- [ ] `habits.html` — Registrar/editar hábitos del día (RF_07/RF_08).
 - [ ] `history.html` — Histórico semanal/mensual (RF_08).
 - [ ] `reports.html` — Reportes con gráficas (RF_11).
 - [ ] `reminders.html` — CRUD de recordatorios (RF_12).
