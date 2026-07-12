@@ -53,15 +53,19 @@ function showReminderToast(message) {
 function showReminderNotification(reminder) {
   const body = reminder.message || "Es hora de cuidar tu bienestar.";
 
+  showReminderToast(body);
+
   if (window.Notification && Notification.permission === "granted") {
-    const notification = new Notification("biUNestar - Recordatorio", {
-      body,
-      icon: "assets/icon.png",
-      tag: `reminder-${reminder.id}`,
-    });
-    notification.onclick = () => window.focus();
-  } else {
-    showReminderToast(body);
+    try {
+      const notification = new Notification("biUNestar - Recordatorio", {
+        body,
+        icon: "assets/icon.png",
+        tag: `reminder-${reminder.id}`,
+      });
+      notification.onclick = () => window.focus();
+    } catch (err) {
+      console.error("No se pudo mostrar la notificación nativa:", err);
+    }
   }
 }
 
@@ -115,7 +119,7 @@ function renderPermissionBanner() {
 function initReminderNotifications() {
   if (!Session.isAuthenticated()) return;
   renderPermissionBanner();
-  checkReminders();
+  checkReminders(); 
   setInterval(checkReminders, CHECK_INTERVAL_MS);
 }
 

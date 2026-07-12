@@ -71,7 +71,7 @@ async function toggleActive(id, active) {
     await apiFetch(`/reminders/me/${id}`, { method: "PATCH", body: { active } });
   } catch (err) {
     showAlert(err.message || "No se pudo actualizar el recordatorio.", "danger");
-    loadReminders(); 
+    loadReminders();
   }
 }
 
