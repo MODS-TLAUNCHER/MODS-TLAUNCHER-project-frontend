@@ -68,6 +68,22 @@ biUNestar-frontend/
 - Las páginas protegidas empiezan con `Session.requireAuth()` para mandar de
   vuelta al login a quien no tenga sesión.
 
+## Notificaciones de recordatorios (en el navegador)
+ 
+`js/notifications.js` se incluye en todas las páginas autenticadas. Cada
+minuto revisa `GET /reminders/me`; si algún recordatorio **activo**
+coincide con la hora actual, muestra una notificación del navegador
+(`Notification` API) o, si el usuario no dio permiso, un toast dentro de la
+página.
+ 
+- Solo funciona **mientras el navegador está abierto** (no es push real en
+  segundo plano; eso requeriría un Service Worker + servidor push, o el
+  envío de correos desde el backend).
+- Al cargar cualquier página se muestra un banner para activar el permiso
+  si aún no se ha concedido ni denegado.
+- Cada recordatorio solo notifica una vez por minuto/día (se guarda un
+  registro en `sessionStorage` para no repetir el aviso en cada chequeo).
+
 ## Páginas construidas hasta ahora
 
 - [x] `index.html` — Login con Google.
@@ -76,10 +92,10 @@ biUNestar-frontend/
 - [x] `history.html` — Histórico semanal/mensual (RF_08).
 - [x] `reports.html` — Reportes con gráficas (RF_11).
 - [x] `reminders.html` — CRUD de recordatorios (RF_12).
+- [x] `resources.html` — Recursos de apoyo, lectura para todos / CRUD para admin (RF_16).
 
 ## Próximas páginas (pendientes)
 
-- [ ] `resources.html` — Recursos de apoyo, lectura para todos / CRUD para admin (RF_16).
 - [ ] `feedback.html` — Enviar retroalimentación / verla como admin (RF_18).
 - [ ] `profile.html` — Completar/editar perfil (RF_03/RF_15).
 - [ ] `admin_users.html` — Gestión de perfiles de estudiantes, solo admin (RF_17).
