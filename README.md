@@ -75,10 +75,10 @@ biUNestar-frontend/
 - [x] `habits.html` — Registrar/editar hábitos del día (RF_07/RF_08), con sliders y selector de estado de ánimo (RNF_09).
 - [x] `history.html` — Histórico semanal/mensual (RF_08).
 - [x] `reports.html` — Reportes con gráficas (RF_11).
+- [x] `reminders.html` — CRUD de recordatorios (RF_12).
 
 ## Próximas páginas (pendientes)
 
-- [ ] `reminders.html` — CRUD de recordatorios (RF_12).
 - [ ] `resources.html` — Recursos de apoyo, lectura para todos / CRUD para admin (RF_16).
 - [ ] `feedback.html` — Enviar retroalimentación / verla como admin (RF_18).
 - [ ] `profile.html` — Completar/editar perfil (RF_03/RF_15).

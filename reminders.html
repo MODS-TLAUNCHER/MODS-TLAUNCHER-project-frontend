@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reportes - biUNestar</title>
+  <title>Recordatorios - biUNestar</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -42,8 +42,8 @@
           <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-home me-2"></i>Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" href="habits.html"><i class="fas fa-plus-circle me-2"></i>Registrar hábitos</a></li>
           <li class="nav-item"><a class="nav-link" href="history.html"><i class="fas fa-history me-2"></i>Historial</a></li>
-          <li class="nav-item"><a class="nav-link active" href="reports.html"><i class="fas fa-chart-line me-2"></i>Reportes</a></li>
-          <li class="nav-item"><a class="nav-link" href="reminders.html"><i class="fas fa-bell me-2"></i>Recordatorios</a></li>
+          <li class="nav-item"><a class="nav-link" href="reports.html"><i class="fas fa-chart-line me-2"></i>Reportes</a></li>
+          <li class="nav-item"><a class="nav-link active" href="reminders.html"><i class="fas fa-bell me-2"></i>Recordatorios</a></li>
           <li class="nav-item"><a class="nav-link" href="resources.html"><i class="fas fa-book me-2"></i>Recursos</a></li>
           <li class="nav-item"><a class="nav-link" href="feedback.html"><i class="fas fa-comment-dots me-2"></i>Retroalimentación</a></li>
           <li id="adminMenuItem" class="nav-item d-none">
@@ -56,25 +56,11 @@
 
         <div id="alertsArea"></div>
 
-        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-          <h4 class="mb-0">Reportes semanales</h4>
-
-          <form id="generateForm" class="d-flex align-items-end gap-2 flex-wrap">
-            <div>
-              <label class="form-label small text-muted mb-0">Cualquier fecha de la semana a reportar</label>
-              <input type="date" id="referenceDate" class="form-control form-control-sm" />
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm" id="generateBtn">
-              <i class="fas fa-sync me-1"></i> Generar / actualizar
-            </button>
-          </form>
-        </div>
-
-        <div class="card stat-card mb-4">
-          <div class="card-body">
-            <h6 class="text-muted mb-3">Evolución semana a semana</h6>
-            <canvas id="reportsChart" height="90"></canvas>
-          </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="mb-0">Recordatorios</h4>
+          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reminderModal" id="newReminderBtn">
+            <i class="fas fa-plus me-1"></i> Nuevo recordatorio
+          </button>
         </div>
 
         <div class="card stat-card">
@@ -83,15 +69,14 @@
               <table class="table table-hover align-middle mb-0">
                 <thead class="table-light">
                   <tr>
-                    <th>Semana</th>
-                    <th>Año</th>
-                    <th>Sueño prom.</th>
-                    <th>Agua prom.</th>
-                    <th>Actividad prom.</th>
+                    <th>Hora</th>
+                    <th>Mensaje</th>
+                    <th>Estado</th>
+                    <th class="text-end">Acciones</th>
                   </tr>
                 </thead>
-                <tbody id="reportsBody">
-                  <tr><td colspan="5" class="text-center text-muted py-4">Cargando...</td></tr>
+                <tbody id="remindersBody">
+                  <tr><td colspan="4" class="text-center text-muted py-4">Cargando...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -102,11 +87,47 @@
     </div>
   </div>
 
+  <div class="modal fade" id="reminderModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="reminderForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="reminderModalTitle">Nuevo recordatorio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="reminderId" />
+
+            <div class="mb-3">
+              <label for="reminderTime" class="form-label">Hora</label>
+              <input type="time" id="reminderTime" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="reminderMessage" class="form-label">Mensaje</label>
+              <input type="text" id="reminderMessage" class="form-control" maxlength="255"
+                placeholder="Ej: ¡Hora de tomar agua!" />
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="reminderActive" checked />
+              <label class="form-check-label" for="reminderActive">Activo</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="reminderSubmitBtn">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/notifications.js"></script>
-  <script src="js/reports.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/reminders.js"></script>
 </body>
 </html>
