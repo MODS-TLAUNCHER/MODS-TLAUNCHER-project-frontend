@@ -89,14 +89,14 @@ página.
 - [x] `index.html` — Login con Google.
 - [x] `dashboard.html` — Resumen de hoy + promedios semanales (RF_09).
 - [x] `habits.html` — Registrar/editar hábitos del día (RF_07/RF_08), con sliders y selector de estado de ánimo (RNF_09).
-- [x] `history.html` — Histórico semanal/mensual (RF_08).
-- [x] `reports.html` — Reportes con gráficas (RF_11).
-- [x] `reminders.html` — CRUD de recordatorios (RF_12).
-- [x] `resources.html` — Recursos de apoyo, lectura para todos / CRUD para admin (RF_16).
+- [x] `history.html` — Histórico por rango de fechas, con atajos de 7/30 días y edición directa de un día pasado (RF_08).
+- [x] `reports.html` — Genera/actualiza el reporte de una semana y grafica la evolución con Chart.js (RF_11).
+- [x] `reminders.html` — CRUD completo de recordatorios, con switch de activo/inactivo (RF_12).
+- [x] `resources.html` — Recursos de apoyo en tarjetas; lectura para todos, alta/edición/borrado solo para admin (RF_16).
+- [x] `feedback.html` — Enviar retroalimentación (máx. 1 por día, categoría + mensaje), ver tu propio historial, y vista de administrador con toda la retroalimentación de todos los usuarios (RF_18).
 
 ## Próximas páginas (pendientes)
 
-- [ ] `feedback.html` — Enviar retroalimentación / verla como admin (RF_18).
 - [ ] `profile.html` — Completar/editar perfil (RF_03/RF_15).
 - [ ] `admin_users.html` — Gestión de perfiles de estudiantes, solo admin (RF_17).
 
