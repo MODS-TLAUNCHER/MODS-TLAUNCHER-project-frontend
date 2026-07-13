@@ -94,11 +94,16 @@ página.
 - [x] `reminders.html` — CRUD completo de recordatorios, con switch de activo/inactivo (RF_12).
 - [x] `resources.html` — Recursos de apoyo en tarjetas; lectura para todos, alta/edición/borrado solo para admin (RF_16).
 - [x] `feedback.html` — Enviar retroalimentación (máx. 1 por día, categoría + mensaje), ver tu propio historial, y vista de administrador con toda la retroalimentación de todos los usuarios (RF_18).
+- [x] `profile.html` — Completar/editar tu perfil: carrera, créditos, meta, correo alternativo, nivel de estrés (RF_03/RF_15).
+- [x] `admin_users.html` — Gestión de perfiles de estudiantes: activar/desactivar, editar, eliminar (RF_17). Solo accesible para administradores (redirige a `dashboard.html` si no lo eres).
 
-## Próximas páginas (pendientes)
+## Roadmap completo 🎉
 
-- [ ] `profile.html` — Completar/editar perfil (RF_03/RF_15).
-- [ ] `admin_users.html` — Gestión de perfiles de estudiantes, solo admin (RF_17).
+Con esto todas las páginas del análisis MoSCoW (Must have + Should have) están construidas. Ideas para seguir puliendo:
+ 
+- Exportar reportes en PDF (RF_13, Could have).
+- Reemplazar el `alert("¿Eliminar...?")`/`confirm()` nativos por modales de Bootstrap para una UX más consistente.
+- Paginación en `admin_users.html` y `feedback.html` (todas) si la cantidad de datos crece mucho.
 
 El sidebar de `dashboard.html` ya tiene los enlaces a todas estas páginas
 listos; solo falta crear cada archivo.
