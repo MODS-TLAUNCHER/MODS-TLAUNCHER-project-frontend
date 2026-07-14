@@ -55,7 +55,12 @@
 
         <div id="alertsArea"></div>
 
-        <h4 class="mb-4">Gestión de estudiantes</h4>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="mb-0">Gestión de estudiantes</h4>
+          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createUserModal">
+            <i class="fas fa-user-plus me-1"></i> Nuevo usuario manual
+          </button>
+        </div>
 
         <div class="card stat-card">
           <div class="card-body p-0">
@@ -114,6 +119,55 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" id="editUserSubmitBtn">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createUserModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="createUserForm">
+          <div class="modal-header">
+            <h5 class="modal-title">Nuevo usuario manual</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-muted small">
+              Para cuentas sin correo institucional de Google (invitados, profesores,
+              cuentas de prueba). Iniciarán sesión con correo + contraseña en vez de
+              con el botón de Google.
+            </p>
+
+            <div class="mb-3">
+              <label for="createFullName" class="form-label">Nombre completo</label>
+              <input type="text" id="createFullName" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="createEmail" class="form-label">Correo (para iniciar sesión)</label>
+              <input type="email" id="createEmail" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="createPassword" class="form-label">Contraseña</label>
+              <input type="password" id="createPassword" class="form-control" minlength="8" maxlength="20" required />
+              <div class="form-text">
+                8-20 caracteres, con al menos una mayúscula, una minúscula, un número y un
+                carácter especial (! @ # $ % ^ & * etc.), sin espacios.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="createRole" class="form-label">Rol</label>
+              <select id="createRole" class="form-select" required></select>
+            </div>
+            <div class="mb-3">
+              <label for="createCareer" class="form-label">Carrera <span class="text-muted fw-normal">(opcional)</span></label>
+              <input type="text" id="createCareer" class="form-control" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="createUserSubmitBtn">Crear usuario</button>
           </div>
         </form>
       </div>

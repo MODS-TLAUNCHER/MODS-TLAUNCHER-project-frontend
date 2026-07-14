@@ -5,6 +5,7 @@ function showLoginStatus(message, type = "danger") {
 
 async function handleCredentialResponse(response) {
   showLoginStatus("Verificando con el servidor...", "info");
+
   try {
     const data = await apiFetch("/auth/google", {
       method: "POST",
@@ -25,6 +26,34 @@ async function handleCredentialResponse(response) {
     showLoginStatus(err.message || "No se pudo iniciar sesión.");
   }
 }
+
+async function handlePasswordLogin(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  const btn = document.getElementById("passwordLoginBtn");
+  btn.disabled = true;
+  btn.textContent = "Ingresando...";
+
+  try {
+    const data = await apiFetch("/auth/login", {
+      method: "POST",
+      body: { email, password },
+    });
+
+    Session.save(data.access_token, data.user);
+    window.location.href = "dashboard.html";
+  } catch (err) {
+    showLoginStatus(err.message || "Correo o contraseña incorrectos.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Iniciar sesión";
+  }
+}
+
+document.getElementById("passwordLoginForm").addEventListener("submit", handlePasswordLogin);
 
 function initGoogleSignIn() {
   if (!window.google || !google.accounts || !google.accounts.id) {

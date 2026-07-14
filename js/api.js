@@ -68,8 +68,21 @@ async function apiFetch(path, { method = "GET", body = null } = {}) {
   }
 
   if (!res.ok) {
-    const detail = (data && data.detail) || `Error HTTP ${res.status}`;
-    throw new Error(typeof detail === "string" ? detail : JSON.stringify(detail));
+    let message = `Error HTTP ${res.status}`;
+    const detail = data && data.detail;
+
+    if (typeof detail === "string") {
+      message = detail;
+    } else if (Array.isArray(detail)) {
+      message = detail
+        .map((e) => (e.msg || "").replace(/^Value error,\s*/, ""))
+        .filter(Boolean)
+        .join(" ");
+    } else if (detail) {
+      message = JSON.stringify(detail);
+    }
+
+    throw new Error(message);
   }
 
   return data;

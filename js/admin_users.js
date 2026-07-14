@@ -1,6 +1,7 @@
 Session.requireAuth();
 
 let editUserModal;
+let createUserModal;
 
 function showAlert(message, type = "success") {
   document.getElementById("alertsArea").innerHTML = `
@@ -119,6 +120,47 @@ async function handleEditSubmit(event) {
   }
 }
 
+async function loadRoles() {
+  const select = document.getElementById("createRole");
+  try {
+    const roles = await apiFetch("/roles");
+    select.innerHTML = roles.map((r) => `<option value="${r.id}">${r.name}</option>`).join("");
+  } catch (err) {
+    select.innerHTML = `<option value="">No se pudieron cargar los roles</option>`;
+    console.error(err);
+  }
+}
+
+async function handleCreateSubmit(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("createEmail").value;
+
+  const payload = {
+    full_name: document.getElementById("createFullName").value,
+    institutional_email: email,
+    alternative_email: email,
+    password: document.getElementById("createPassword").value,
+    role_id: Number(document.getElementById("createRole").value),
+    career: document.getElementById("createCareer").value || null,
+  };
+
+  const btn = document.getElementById("createUserSubmitBtn");
+  btn.disabled = true;
+
+  try {
+    await apiFetch("/users", { method: "POST", body: payload });
+    showAlert("Usuario creado. Ya puede iniciar sesión con ese correo y contraseña.");
+    createUserModal.hide();
+    document.getElementById("createUserForm").reset();
+    loadUsers();
+  } catch (err) {
+    showAlert(err.message || "No se pudo crear el usuario.", "danger");
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 async function guardAdminAndInit() {
   try {
     const user = await apiFetch("/auth/me");
@@ -126,13 +168,15 @@ async function guardAdminAndInit() {
     document.getElementById("navUserName").textContent = user.full_name;
 
     if (user.role_name !== "Administrador") {
-      // No es admin: esta página no le corresponde.
       window.location.href = "dashboard.html";
       return;
     }
 
     editUserModal = new bootstrap.Modal(document.getElementById("editUserModal"));
+    createUserModal = new bootstrap.Modal(document.getElementById("createUserModal"));
     document.getElementById("editUserForm").addEventListener("submit", handleEditSubmit);
+    document.getElementById("createUserForm").addEventListener("submit", handleCreateSubmit);
+    loadRoles();
     loadUsers();
   } catch (err) {
     console.error(err);
