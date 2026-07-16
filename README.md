@@ -1,7 +1,7 @@
 # biUNestar - Frontend
 
 Frontend estático (HTML + CSS + JS plano, sin frameworks ni build tools) para
-consumir la API de [biUNestar backend](../basefastapi) (FastAPI). Vive en su
+consumir la API de [biUNestar backend](https://github.com/MODS-TLAUNCHER/MODS-TLAUNCHER-project-backend/blob/main/README.md) (FastAPI). Vive en su
 propia carpeta, separada del backend, tal como debe estar organizado el
 proyecto.
 
